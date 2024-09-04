@@ -25,34 +25,22 @@ using namespace std;
 #define      nl            '\n'
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
 
-
 void solve(){
-  int n; string s;
-  cin >> n >> s;
+     int n;cin >> n;
+     vi v;
+     for(int i = 1; i<=n; i++){
+        for(int j = 1; j<=4; j++){
+            char c; cin >> c;
+            if(c=='#') v.pb(j);
+        }
+     }
 
-  set<char>st; map<char,int>mp;
-  for(int i = 0; i<n; i++){
-    st.insert(s[i]);
-    mp[s[i]]++;
-    
-  }
-  while(1){
-    int ch = 1;
-    for(auto u : st){
-      if(mp[u]!=0){
-        cout<<u;
-        mp[u]--;
-        ch = 0;
-      }
-    }
-    if(ch){
-      cout<<nl;
-      break;
-    }
-  }
-      
+     reverse(all(v));
 
-}
+     outv(v);
+            
+   
+    }
 
 int main() {
     fast();
