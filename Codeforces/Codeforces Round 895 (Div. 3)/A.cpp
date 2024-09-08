@@ -27,24 +27,16 @@ using namespace std;
   
 void solve(){
 
-       int n; cin >> n;
-       vi v(n); inv (v);
+      int a, b , c; cin >> a >> b >> c;
+      int x = abs(a-b)/2+(abs(a-b)%2!=0);
 
-       int x = v[0], cnt = 0, ans = INT_MAX;
+      if(abs(a-b)<c){
+        if(abs(a-b)==0) cout<<0<<nl;
+        else cout<<1<<nl;
+        return;
+      }
+      cout<<(x/c)+(x%c!=0)<<nl;
 
-       for(int i = 0; i<n; i++){
-        if(x==v[i]) cnt++;
-        else{
-            ans = min (ans,cnt);
-            cnt = 0;
-        }
-       }
-       
-       ans =min(ans,cnt);
-       if(cnt ==n)cout<<-1<<nl;
-       else cout<< ans << endl;
-       
-       
 }
 int main() {
     fast();
@@ -55,8 +47,7 @@ int main() {
     #endif
     
     int t;t=1;
-    cin>>t;
+   cin>>t;
     while(t--)solve();
     return 0;
 }
-

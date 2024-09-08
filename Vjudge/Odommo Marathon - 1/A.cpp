@@ -26,25 +26,11 @@ using namespace std;
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
   
 void solve(){
-
-       int n; cin >> n;
-       vi v(n); inv (v);
-
-       int x = v[0], cnt = 0, ans = INT_MAX;
-
-       for(int i = 0; i<n; i++){
-        if(x==v[i]) cnt++;
-        else{
-            ans = min (ans,cnt);
-            cnt = 0;
-        }
-       }
        
-       ans =min(ans,cnt);
-       if(cnt ==n)cout<<-1<<nl;
-       else cout<< ans << endl;
-       
-       
+       int a, b, c; cin >> a >> b >> c;
+
+       if(a+b==c || a+c==b || b+c==a) yes;
+       else no;
 }
 int main() {
     fast();
