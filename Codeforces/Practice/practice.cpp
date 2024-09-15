@@ -27,24 +27,20 @@ using namespace std;
   
 void solve(){
 
-       int n; cin >> n;
-       vi v(n); inv (v);
+     int n; cin >> n;
+     vi v(n),p(n),has(n); inv (v);
 
-       int x = v[0], cnt = 0, ans = INT_MAX;
-
-       for(int i = 0; i<n; i++){
-        if(x==v[i]) cnt++;
-        else{
-            ans = min (ans,cnt);
-            cnt = 0;
+     int mex = 0;
+     for(int i =0; i<n; i++){
+      if(v[i]>=0){
+        p[i] = mex;
         }
-       }
-       
-       ans =min(ans,cnt);
-       if(cnt ==n)cout<<-1<<nl;
-       else cout<< ans << endl;
-       
-       
+      else p[i] = mex-v[i];
+      has[p[i]] = true;
+        while(has[mex]) mex++;
+     }
+     for(auto u:p)cout<<u<<' ';
+          cout<<nl;
 }
 int main() {
     fast();

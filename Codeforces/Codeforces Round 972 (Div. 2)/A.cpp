@@ -24,25 +24,36 @@ using namespace std;
 #define      out(x)        cout<<x<<nl
 #define      nl            '\n'
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
-int isprime(int x){
-    for(int i = 2; i*i<=x; i++){
-        if(x%i==0) return i;
-    }
-    return -1;
-}
+  
 void solve(){
 
-        int l, r; cin >> l >> r;
-        
-        for(int i =l; i<=r; i++){
-            int p  = isprime(i);
-            if(p!=-1){
-                cout<<p <<' '<<i-p<<nl;
-                return;
-            }
-        }
-        out(-1);
-       
+    int n; cin >> n;
+    string str="aeiou";
+    if(n<=5){
+        for(int i =0; i<n; i++)cout<<str[i];
+        cout<<endl;
+        return ;
+    }
+    string s = "";
+    int num = n/5,rem = n%5, temp;
+
+    temp = num;
+    while(temp--) s+='a';
+    if(rem>=1) s+='a';
+    temp = num;
+    while(temp--)s+='e';
+    if(rem>=2) s+='e';
+    temp = num;
+    while(temp--)s+='i';
+    if(rem>=3) s+='i';
+    temp = num;
+    while(temp--)s+='o';
+    if(rem>=4) s+='o';
+    temp = num;
+    while(temp--)s+='u';
+
+    cout<<s<<endl;
+
 }
 int main() {
     fast();
@@ -57,3 +68,4 @@ int main() {
     while(t--)solve();
     return 0;
 }
+
