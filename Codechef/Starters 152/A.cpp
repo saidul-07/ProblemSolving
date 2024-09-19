@@ -26,12 +26,11 @@ using namespace std;
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
   
 void solve(){
+int x, y, z; cin >> x >> y >>z;
 
-     string str="saidul ";
-     str.back()='.';
-     cout<<str<<endl;
-     str.erase(1,3);
-     cout<<str<<endl;
+int win = (x-z)+4-(x+y+z);
+if(win>0)yes;
+else no;
          
 }
 int main() {

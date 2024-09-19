@@ -27,12 +27,19 @@ using namespace std;
   
 void solve(){
 
-     string str="saidul ";
-     str.back()='.';
-     cout<<str<<endl;
-     str.erase(1,3);
-     cout<<str<<endl;
+         ll n; cin >> n;
+         vll v(n); inv (v);
+
+         sort(all(v));
+         if(n==3) {
+            out(0);
+            return;
+         }
+         ll ans1 = v[n-1]-v[2];
          
+         ll ans2 = v[n-3]-v[0];
+         ll ans3 = v[n-2]-v[1];
+         cout<<min(ans1, min(ans2,ans3))<<endl;
 }
 int main() {
     fast();
@@ -43,7 +50,7 @@ int main() {
     #endif
     
     int t;t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }

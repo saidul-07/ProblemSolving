@@ -27,12 +27,42 @@ using namespace std;
   
 void solve(){
 
-     string str="saidul ";
-     str.back()='.';
-     cout<<str<<endl;
-     str.erase(1,3);
-     cout<<str<<endl;
-         
+       int n, m; cin >> n >> m;
+       vector<string>s(m);
+       for(int i = 0; i<m; i++) cin >>s[i];
+       
+       ll ans = 0;
+       for(int i =0; i<n; i++){
+        int one = 0, zero = 0, q = 0;
+        for(int j = 0; j<m; j++){
+            if(s[j][i]=='0') zero++;
+            else if(s[j][i]=='1') one++;
+            else q++;
+        }
+       // cout<<zero<<' '<<one<<' '<<q<<endl;
+        if(q>0){
+        int dif = abs(one-zero);
+        if(dif>q){
+            if(one<zero) one+=q;
+            else zero+=q;
+        }
+        else{
+            q-=dif;
+            one = max(one,zero);
+            zero = one;
+            if(q%2){
+                one+=q/2;
+                zero+=(q/2)+1;
+            }
+            else{
+                one+=q/2;
+                zero+=q/2;
+                 }
+            }
+        }
+        ans+=(zero*one);
+    }
+    out(ans);
 }
 int main() {
     fast();
@@ -43,7 +73,7 @@ int main() {
     #endif
     
     int t;t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }

@@ -27,12 +27,16 @@ using namespace std;
   
 void solve(){
 
-     string str="saidul ";
-     str.back()='.';
-     cout<<str<<endl;
-     str.erase(1,3);
-     cout<<str<<endl;
-         
+         int m, p; cin >> m >> p;
+
+         int time  = p,cnt = 0;
+         for(int i = m; i<299 && (m+cnt+time)<1000; i++){
+                if(m+cnt+time>1000) break;
+                cnt++;
+                time = p+20*cnt;//cout<<time<<' '<<cnt<<endl;
+         }
+         if((m+cnt+time)>1000)cnt--;
+         out(cnt);
 }
 int main() {
     fast();
@@ -43,7 +47,7 @@ int main() {
     #endif
     
     int t;t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }
