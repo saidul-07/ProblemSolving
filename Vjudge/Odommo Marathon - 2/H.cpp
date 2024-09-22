@@ -26,28 +26,39 @@ using namespace std;
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
   
 void solve(){
-    int n; cin >> n;
-    string s; cin >> s;
-    vi v(n);  
-    int res[]={1,3,20,7};
+   int n; cin >> n;
+   vi v(n); inv (v);
 
-    int ans = INT_MAX;
-    int a, b, c, d;
-    for(int i =0; i<n-3; i++){
-            a = abs(s[i]-'A');
-            b = abs(s[i+1]-'C');
-            c = abs(s[i+2]-'T');
-            d = abs(s[i+3]-'G');
+   int mx = -1,cnt = 0;
+   set<int>s; vi p;
+   for(int i = 0; i<n; i++){
+        s.insert(v[i]); cnt++;
+        mx = max(mx,v[i]);
+        if(cnt==mx && s.size()==cnt)
+                p.pb(mx);
+   }
 
-            if(a>=14) a = 26-a;
-            if(b>=14) b = 26-b;
-            if(c>=14) c = 26-c;
-            if(d>=14) d = 26-d;
-            int temp = a+b+c+d;
-            ans = min(ans,temp);
+   cnt = 0, mx = -1; s.clear();
+   bool hold[200000] = {0};
+   for(int i = n-1; i>=0; i--){
+            s.insert(v[i]); cnt++;
+            mx = max(mx, v[i]);
+            if(mx == cnt && s.size()==cnt)
+                    hold[mx] = true;
          }
+    vector<pair<int,int>>ans;
+    for(int i = 0; i<p.size(); i++){
+        if(hold[n-p[i]]){
+            ans.pb(make_pair(p[i],n-p[i]));
+        }
+    }
 
-    out(ans);
+    if(ans.empty()) out(0);
+    else{
+        out(ans.size());
+        for(auto u : ans )
+            cout<<u.first<<' '<<u.second<<nl;
+    }
     
 }
 int main() {
@@ -59,7 +70,7 @@ int main() {
     #endif
     
     int t;t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }

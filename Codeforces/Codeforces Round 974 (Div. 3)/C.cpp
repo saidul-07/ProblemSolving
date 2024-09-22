@@ -26,29 +26,27 @@ using namespace std;
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
   
 void solve(){
-    int n; cin >> n;
-    string s; cin >> s;
-    vi v(n);  
-    int res[]={1,3,20,7};
-
-    int ans = INT_MAX;
-    int a, b, c, d;
-    for(int i =0; i<n-3; i++){
-            a = abs(s[i]-'A');
-            b = abs(s[i+1]-'C');
-            c = abs(s[i+2]-'T');
-            d = abs(s[i+3]-'G');
-
-            if(a>=14) a = 26-a;
-            if(b>=14) b = 26-b;
-            if(c>=14) c = 26-c;
-            if(d>=14) d = 26-d;
-            int temp = a+b+c+d;
-            ans = min(ans,temp);
-         }
-
-    out(ans);
     
+    ll n; cin >> n;
+    vll v(n); inv (v);
+    if(n<3) {
+        out(-1);
+        return;
+    }
+    sort(all(v));
+    ll sum = (accumulate(all(v),0LL));
+    int m=n/2;
+    ll left = -1, right = 1e18;
+
+    while(left+1<right){
+       ll x = (left+right)/2;
+        if((2*n*v[m])<sum+x) 
+            right =x;
+        else left = x;
+    }
+
+    out(right);
+
 }
 int main() {
     fast();
@@ -59,7 +57,7 @@ int main() {
     #endif
     
     int t;t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }
