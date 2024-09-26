@@ -39,16 +39,11 @@ ostream &operator<<(ostream &out,vector<T>&v){
     return out<<endl;
 }
 
-int fibo(int n){
-    if(n==0) return n;
-    if(n==1) return n;
-    return fibo(n-1)+fibo(n-2);
-}
 void solve(){
-    int n; cin >> n;
-    for(int i=0; i<=n; i++)
-        cout<<fibo(i)<<' ';
- 
+
+    int x, y, z; cin >> x >> y >> z;
+    if(y-x == z-y) out(0);
+    else out(1);
 }
 int main() {
     fast();
@@ -59,7 +54,7 @@ int main() {
     #endif
     
     int t;t=1;
-   // cin>>t;
+   cin>>t;
     while(t--)solve();
     return 0;
 }

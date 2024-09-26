@@ -39,15 +39,11 @@ ostream &operator<<(ostream &out,vector<T>&v){
     return out<<endl;
 }
 
-int fibo(int n){
-    if(n==0) return n;
-    if(n==1) return n;
-    return fibo(n-1)+fibo(n-2);
-}
 void solve(){
-    int n; cin >> n;
-    for(int i=0; i<=n; i++)
-        cout<<fibo(i)<<' ';
+
+    int x; cin >> x;
+    if(x<=60) cout<<"YES"<<nl;
+    else cout<<"NO"<<nl;
  
 }
 int main() {

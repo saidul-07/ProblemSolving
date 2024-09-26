@@ -39,15 +39,18 @@ ostream &operator<<(ostream &out,vector<T>&v){
     return out<<endl;
 }
 
-int fibo(int n){
-    if(n==0) return n;
-    if(n==1) return n;
-    return fibo(n-1)+fibo(n-2);
-}
 void solve(){
-    int n; cin >> n;
-    for(int i=0; i<=n; i++)
-        cout<<fibo(i)<<' ';
+    ll n; cin >> n;
+    vll v(n); cin >> v;
+
+    ll maxmis =-1;
+    for(int i =n-1; i>=0; i--){
+        if(v[i]!=(i+1)){
+            maxmis = max(maxmis,v[i]);
+        }
+    }
+    
+    cout<<maxmis+1 << nl;
  
 }
 int main() {
@@ -59,7 +62,7 @@ int main() {
     #endif
     
     int t;t=1;
-   // cin>>t;
+   cin>>t;
     while(t--)solve();
     return 0;
 }

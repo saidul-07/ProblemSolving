@@ -22,33 +22,12 @@ using namespace std;
 #define      yes           cout<<"YES"<<nl
 #define      no            cout<<"NO"<<nl
 #define      out(x)        cout<<x<<nl
-#define      nl            '\n'
+#define      nl            endl
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
-template<typename T> // vector input
-istream &operator>>(istream&in, vector<T>&v){
-    for(auto &it : v )
-        in>> it;
-    return in;
-}
-template<typename T> // vector output
-ostream &operator<<(ostream &out,vector<T>&v){
-    for(auto it = v.begin(); it!=v.end(); ++it){
-        if(it!=v.begin()) out<<' ';
-        out<<*it;
-    }
-    return out<<endl;
-}
-
-int fibo(int n){
-    if(n==0) return n;
-    if(n==1) return n;
-    return fibo(n-1)+fibo(n-2);
-}
+  
 void solve(){
-    int n; cin >> n;
-    for(int i=0; i<=n; i++)
-        cout<<fibo(i)<<' ';
- 
+    
+        
 }
 int main() {
     fast();
@@ -58,8 +37,8 @@ int main() {
     freopen("output.txt","w",stdout);
     #endif
     
-    int t;t=1;
-   // cin>>t;
+    ll t;t=1;
+    cin>>t;
     while(t--)solve();
     return 0;
 }
