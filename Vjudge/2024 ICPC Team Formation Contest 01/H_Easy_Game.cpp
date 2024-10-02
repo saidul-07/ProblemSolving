@@ -24,47 +24,48 @@ using namespace std;
 #define      out(x)        cout<<x<<nl
 #define      nl            '\n'
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
-template<typename T> // vector input
-istream &operator>>(istream&in, vector<T>&v){
-    for(auto &it : v )
-        in>> it;
-    return in;
-}
-template<typename T> // vector output
-ostream &operator<<(ostream &out,vector<T>&v){
-    for(auto it = v.begin(); it!=v.end(); ++it){
-        if(it!=v.begin()) out<<' ';
-        out<<*it;
-    }
-    return out<<endl;
-}
+// vector input
+template<typename T> istream &operator>>(istream&in, vector<T>&v){ for(auto &it : v ) in>> it; return in;}
+// vector output
+template<typename T>ostream &operator<<(ostream &out,vector<T>&v){for(auto it = v.begin(); it!=v.end(); ++it){ if(it!=v.begin()) out<<' '; out<<*it;} return out<<endl;}
 
-int climbStairs(int n,vector<ll>&dp){
-    if(n<=1) return 1;
-    if(dp[n]!=-1) return dp[n];
-    int ans = 0;
-    ans+=climbStairs(n-1,dp);
-    ans+=climbStairs(n-2,dp);
-    dp[n] = ans;
-    return ans;
+ll v[105],dp[105][105];
+ll maxdif(ll l, ll r){
+    if(l>r) return 0;
+    if(dp[l][r]!=-1) return dp[l][r];
+
+    ll ans = LLONG_MIN, sum = 0;
+    for(ll i = l; i<=r; i++){
+        sum+=v[i]; 
+        ans = max(ans, sum-maxdif(i+1,r));
+        //cout<<sum<<' ';
+    }
+    sum = 0;
+    for(ll i = r; i>=l; i--){
+        sum+=v[i];
+        ans = max(ans,sum-maxdif(l,i-1));
+    }
+
+    return dp[l][r] = ans;
 }
 void solve(){
-    
+    int ts; cin >> ts;
+    fo1(1,ts){
+    cout<<"Case "<<i<<": ";
     int n; cin >> n;
-    vector<ll>dp(n,-1);
-    cout<<climbStairs(n,dp)<<nl;
+    for(int i = 0; i<n; i++)cin >> v[i];
+    memset(dp,-1,sizeof(dp));
+
+    cout<<maxdif(0,n-1)<<nl;  
+    } 
+       
 }
 int main() {
     fast();
-   
-    #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r",stdin);
-    freopen("output.txt","w",stdout);
-    #endif
-    
     int t;t=1;
    // cin>>t;
     while(t--)solve();
     return 0;
 }
+
 

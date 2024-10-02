@@ -24,46 +24,50 @@ using namespace std;
 #define      out(x)        cout<<x<<nl
 #define      nl            '\n'
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
-template<typename T> // vector input
-istream &operator>>(istream&in, vector<T>&v){
-    for(auto &it : v )
-        in>> it;
-    return in;
-}
-template<typename T> // vector output
-ostream &operator<<(ostream &out,vector<T>&v){
-    for(auto it = v.begin(); it!=v.end(); ++it){
-        if(it!=v.begin()) out<<' ';
-        out<<*it;
-    }
-    return out<<endl;
-}
+// vector input
+template<typename T> istream &operator>>(istream&in, vector<T>&v){ for(auto &it : v ) in>> it; return in;}
+// vector output
+template<typename T>ostream &operator<<(ostream &out,vector<T>&v){for(auto it = v.begin(); it!=v.end(); ++it){ if(it!=v.begin()) out<<' '; out<<*it;} return out<<endl;}
 
-int climbStairs(int n,vector<ll>&dp){
-    if(n<=1) return 1;
-    if(dp[n]!=-1) return dp[n];
-    int ans = 0;
-    ans+=climbStairs(n-1,dp);
-    ans+=climbStairs(n-2,dp);
-    dp[n] = ans;
-    return ans;
-}
 void solve(){
-    
-    int n; cin >> n;
-    vector<ll>dp(n,-1);
-    cout<<climbStairs(n,dp)<<nl;
+    ll n, q; cin >> n >> q;
+    vll v(n); cin >> v;
+
+    map<ll,ll>mp;
+    ll fs = 0, end = 0;
+    for(int i = 0; i<n; i++){
+        fs+=n-i-1;
+        end+=i;
+        if(i==n-1){
+            mp[fs-(end-i)]++;
+        }
+        else{
+            ll dif = v[i+1]-v[i];
+            if(dif==1) mp[fs-(end-i)]++;
+            else{
+                mp[fs-(end-i)]++;
+                mp[fs-end]+=dif-1;
+            }
+        }
+    }
+
+    while(q--){
+        ll x ;cin >> x;
+        if(mp[x]!=0)cout<<mp[x]<<' ';
+        else cout<<0<<' ';    
+        }
+        cout<<nl;
+ 
 }
 int main() {
     fast();
-   
     #ifndef ONLINE_JUDGE
     freopen("input.txt", "r",stdin);
     freopen("output.txt","w",stdout);
     #endif
     
     int t;t=1;
-   // cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }

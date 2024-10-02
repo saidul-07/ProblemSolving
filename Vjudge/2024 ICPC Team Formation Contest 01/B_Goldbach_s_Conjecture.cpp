@@ -24,47 +24,56 @@ using namespace std;
 #define      out(x)        cout<<x<<nl
 #define      nl            '\n'
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
-template<typename T> // vector input
-istream &operator>>(istream&in, vector<T>&v){
-    for(auto &it : v )
-        in>> it;
-    return in;
-}
-template<typename T> // vector output
-ostream &operator<<(ostream &out,vector<T>&v){
-    for(auto it = v.begin(); it!=v.end(); ++it){
-        if(it!=v.begin()) out<<' ';
-        out<<*it;
+// vector input
+template<typename T> istream &operator>>(istream&in, vector<T>&v){ for(auto &it : v ) in>> it; return in;}
+// vector output
+template<typename T>ostream &operator<<(ostream &out,vector<T>&v){for(auto it = v.begin(); it!=v.end(); ++it){ if(it!=v.begin()) out<<' '; out<<*it;} return out<<endl;}
+
+const int N =1e7+3;
+bool primeseive[N];
+vector<int>prime;
+
+void seive(){
+    primeseive[0]=primeseive[1]=true;
+    for(int i = 2; i*i<=N; i++){
+        if(primeseive[i]==false){
+            for(int j = i*i; j<=N; j+=i)
+                primeseive[j] = true;
+        }
     }
-    return out<<endl;
+    for(int i =2; i<=N; i++){ // store prime number
+        if(!primeseive[i]) prime.pb(i);
+    }
 }
 
-int climbStairs(int n,vector<ll>&dp){
-    if(n<=1) return 1;
-    if(dp[n]!=-1) return dp[n];
-    int ans = 0;
-    ans+=climbStairs(n-1,dp);
-    ans+=climbStairs(n-2,dp);
-    dp[n] = ans;
-    return ans;
-}
 void solve(){
-    
-    int n; cin >> n;
-    vector<ll>dp(n,-1);
-    cout<<climbStairs(n,dp)<<nl;
+    int ts; cin >> ts;
+
+    fo1(1,ts){
+        cout<<"Case "<<i<<": ";
+        int n,cnt = 0; cin >> n;
+
+        for(int i = 0; i<prime.size(); i++){
+            if(prime[i]>n) break;
+            int dif = n-prime[i];
+            if(!primeseive[dif] && (dif>=prime[i])) cnt++;
+        }
+        cout<<cnt<<nl;
+  }
+ 
 }
 int main() {
     fast();
-   
-    #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r",stdin);
-    freopen("output.txt","w",stdout);
-    #endif
+    seive();
+    //#ifndef ONLINE_JUDGE
+    //freopen("input.txt", "r",stdin);
+    //freopen("output.txt","w",stdout);
+   // #endif
     
     int t;t=1;
-   // cin>>t;
+    //cin>>t;
     while(t--)solve();
     return 0;
 }
+
 
