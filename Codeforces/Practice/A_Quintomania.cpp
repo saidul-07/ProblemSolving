@@ -41,17 +41,34 @@ ll Bigmod(ll b, ll p){
     }
     return res%mod;
 }
+//Calculate ceil value
+int ceil(int a,int b)
+{
+    return (a+b-1)/b;
+}
 
 void solve(){
-  int a,b; cin >> a >> b;
-  cout<<max(a+b,max(a*b,a-b))<<nl;
+    
+    int n ;cin >> n;
+    vi v(n); cin >> v;
+    int x = v[0];
+    for(int i = 1; i<n; i++){
+        int dif=abs(v[i]-x);
+        x=v[i];
+        //cout<<dif<<nl;
+        if(dif!=5 && dif!=7){
+            no;
+            return;
+        }
+    }
+    yes;
  
 }
 int main() {
     fast();
     
     int t;t=1;
-   // cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }

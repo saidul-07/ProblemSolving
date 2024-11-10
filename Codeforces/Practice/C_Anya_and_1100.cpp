@@ -41,36 +41,62 @@ ll Bigmod(ll b, ll p){
     }
     return res%mod;
 }
-const int N=2e5+5;
-int cnt[N];
-void solve(){
-  
-        int n; cin >> n; 
-        vi v(n); cin >> v;
+//Calculate ceil value
+int ceil(int a,int b)
+{
+    return (a+b-1)/b;
+}
 
-        if(n>=60){
-            cout<<"Yes"<<nl;
-            return;
+// bool check(string s, int l, int r){
+//     for(int i =l; i<=r && i+3<s.size(); i++){
+//        if(s[i]=='1' && s[i+1]=='1' && s[i+2]=='0' && s[i+3]=='0'){
+//             return true;
+//        }
+//     }
+//     return false;
+// }
+void solve(){
+    
+    string str; cin >> str;
+
+    int cnt = 0;
+    for(int i = 0; i+3<str.size(); i++){
+        if(str[i]=='1' && str[i+1]=='1' && str[i+2]=='0' && str[i+3]=='0'){
+            cnt++;
+            i+=3;
         }
-       
-        for(int i = 0; i<n; i++){
-            for(int j = i+1; j<n; j++){
-                int x = v[i]^v[j];
-                cnt[x]++;
-                if(cnt[x]>1){
-                    cout<<"Yes"<<nl;
-                    return;
+    }
+
+    int q; cin >> q;
+    while(q--){
+        int loc; char val; cin >> loc >> val;
+        loc--;
+        int l = max(0,loc-3), r =loc;
+        //if(check(str,l,r)) cnt--;
+        for(int i =l; i<=r && i+3<str.size(); i++){
+            if(str[i]=='1' && str[i+1]=='1' && str[i+2]=='0' && str[i+3]=='0'){
+                    cnt--;
+                 }
+        }
+        str[loc]=val;
+        for(int i =l; i<=r && i+3<str.size(); i++){
+            if(str[i]=='1' && str[i+1]=='1' && str[i+2]=='0' && str[i+3]=='0'){
+                    cnt++;
                 }
-            }
         }
-        cout<<"No"<<nl;
+        //cout<<l<<' '<<r<<nl;
+        //if(check(str,l,r))cnt++;
+        //cout<<str<<' '<<cnt<<nl;
+        if(cnt) yes;
+        else no;
+    }
  
 }
 int main() {
     fast();
     
     int t;t=1;
-   // cin>>t;
+    cin>>t;
     while(t--)solve();
     return 0;
 }

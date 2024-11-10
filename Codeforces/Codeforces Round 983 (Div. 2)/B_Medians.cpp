@@ -22,24 +22,62 @@ using namespace std;
 #define      yes           cout<<"YES"<<nl
 #define      no            cout<<"NO"<<nl
 #define      out(x)        cout<<x<<nl
-#define      nl            endl
+#define      nl            '\n'
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
-  
+
+// vector input
+template<typename T> istream &operator>>(istream&in, vector<T>&v){ for(auto &it : v ) in>> it; return in;}
+
+// vector output
+template<typename T>ostream &operator<<(ostream &out,vector<T>&v){for(auto it = v.begin(); it!=v.end(); ++it){ if(it!=v.begin()) out<<' '; out<<*it;} return out<<endl;}
+
+// Big Power Function Modulation
+ll Bigmod(ll b, ll p){
+    ll res = 1;
+    while(p){
+        if(p&1) res=(res*b)%mod;
+        b = (b*b)%mod;
+        p>>=1;
+    }
+    return res%mod;
+}
+//Calculate ceil value
+int ceil(int a,int b)
+{
+    return (a+b-1)/b;
+}
+
 void solve(){
-    
-        
+  
+        int n, k; cin >> n >> k;
+        if(n==1){
+            if(k==1){
+                cout<<1<<nl;
+                cout<<1<<nl;
+            }
+            else cout<<-1<<nl;
+            return;
+        }
+        else{
+             if(k==1 || k==n){
+                cout<<-1<<nl;
+                return;
+            }
+            if(k%2==0){
+            int l=1,m=k,r=k+1;
+                cout<<3<<nl;
+                cout<<l<<' '<<m<<' '<<r<<nl;
+            }
+            else cout<<3<<nl<<1<<' '<<k-1<<' '<<k+2<<nl;
+        }
 }
 int main() {
     fast();
-   
-    #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r",stdin);
-    freopen("output.txt","w",stdout);
-    #endif
     
-    ll t;t=1;
+    int t;t=1;
     cin>>t;
     while(t--)solve();
     return 0;
 }
+
 
