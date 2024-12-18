@@ -59,39 +59,30 @@ int ceil(int a,int b)
 }
 
 void solve(){
-
-        ll n, l, r; cin >> n >> l >> r;
+    
+        int n; cin >> n;
         vll v(n);
-
-        set<ll>st;
-        bool zero = false;
-        for(ll i=0; i<n; i++){
+        set<ll>st1;
+        for(int i =0; i<n; i++){
             cin >> v[i];
-            if(st.count(v[i])){
-               zero = true;
-            }
-            st.insert(v[i]);
+            st1.insert(v[i]);
         }
-        if(zero){
-            if(l==0 && r>=0) yes;
-            else no;
-        }
-        else{
-            bool check = true;
-            ll product = 1;
-            for(int i = 0; i<n && check; i++){
-                for(int j = i+1; j<n; j++){
-                    product*=(v[i]^v[j]);
-                    
-                    if(product>r){
-                    check = false;
-                    break;
-                    }
+
+        int x = n;
+        set<int>st2;
+        for(int i= 0; i<n; i++){
+            
+            if(st2.count(v[i])){
+                while(st1.count(x)){
+                    x--;
                 }
+                cout << x--<<' ';
             }
-        if(check && product>=l && product<=r) yes;
-        else no;
+            else cout << v[i]<<' ';
+            st2.insert(v[i]);
         }
+        cout << nl;
+ 
 }
 int main() {
     fast();

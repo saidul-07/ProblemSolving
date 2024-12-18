@@ -60,44 +60,23 @@ int ceil(int a,int b)
 
 void solve(){
 
-        ll n, l, r; cin >> n >> l >> r;
-        vll v(n);
+        int n; cin >> n;
+        vi v(n+1);
 
-        set<ll>st;
-        bool zero = false;
-        for(ll i=0; i<n; i++){
+        int energy = 0, ans = 0;
+        for(int i = 1; i<=n; i++){
             cin >> v[i];
-            if(st.count(v[i])){
-               zero = true;
-            }
-            st.insert(v[i]);
+            energy+=v[i-1]-v[i];
+            if(energy<0) ans-=energy, energy = 0;
         }
-        if(zero){
-            if(l==0 && r>=0) yes;
-            else no;
-        }
-        else{
-            bool check = true;
-            ll product = 1;
-            for(int i = 0; i<n && check; i++){
-                for(int j = i+1; j<n; j++){
-                    product*=(v[i]^v[j]);
-                    
-                    if(product>r){
-                    check = false;
-                    break;
-                    }
-                }
-            }
-        if(check && product>=l && product<=r) yes;
-        else no;
-        }
+        cout << ans << nl;
+ 
 }
 int main() {
     fast();
     
     int t;t=1;
-    cin>>t;
+   // cin>>t;
     while(t--)solve();
     return 0;
 }
