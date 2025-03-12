@@ -59,35 +59,15 @@ int ceil(int a,int b)
 }
 
 void solve(){
+  
 
-        ll a, b, x, y, n; cin >> a >> b >> x >> y >> n;
-        if(n>=(a-x+b-y)){
-            cout<<x*y<<nl;
-            return;
-        }
-        if(a<b){
-            if((a-n)>=x) a-=n;
-            //else if((b-n)>=y) b-=n;
-            else{
-                if(a-(n-(b-y))>=x) a-=(n-(b-y));
-                b=y;
-            }
-            cout<<a*b<<nl;
-        }
-        else if(a==b){
-            if((a-n)>=x) a-=n;
-            else if((b-n)>=y) b-=n;
-            cout<<a*b<<nl;
-        }
-        else{
-            if((b-n)>=y) b-=n;
-           // else if((a-n)>=x) a-=n;
-            else{
-                if(a-(n-(b-y))>=x) a-=(n-(b-y));
-                b=y;
-            }
-            cout<<a*b<<nl;
-        }
+    ll a, b, x, y, n; cin >> a >> b >> x >> y >> n;
+
+    int da= min(n,a-x), db = min(n-da,b-y);
+    ll ans = (a-da)*(b-db);
+    da = min(n,b-y), db = min(n-da,a-x);
+    ans = min(ans,1LL*(b-da)*(a-db));
+    out(ans);
  
 }
 int main() {

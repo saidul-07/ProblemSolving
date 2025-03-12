@@ -59,28 +59,43 @@ int ceil(int a,int b)
 }
 
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
-
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
-
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
+    int t; cin>>t;
+    for(int j = 1; j<=t; j++){
+        cout<<"Case "<<j<<":\n";
+        ll n; cin>>n;
+        priority_queue<pair<ll,int>>q;
+        for(int i = 0; i<n; i++){
+            ll x; cin>>x;
+            q.push({x,i});
+        }
+        ll query; cin>>query;
+        while(query--){
+            ll m; cin >>m;
+            while(q.top().first>=m){
+                ll ind = q.top().second;
+                ll x = q.top().first;
+                q.pop();
+                q.push({x%m,ind});
+            }
+        }
+        ll ans[n];
+        for(int i = 0; i<n; i++){
+            ans[q.top().second]=q.top().first;
+            q.pop();
+        }
+        for(int i = 0; i<n; i++){
+            if(i!=(n-1)) cout<<ans[i]<<" ";       
+            else cout<<ans[i];
+        }
+        cout<<nl;
     }
-  
  
 }
 int main() {
     fast();
     
     int t;t=1;
-    cin>>t;
+    //cin>>t;
     while(t--)solve();
     return 0;
 }

@@ -59,21 +59,45 @@ int ceil(int a,int b)
 }
 
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
 
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
+        int n, m; cin >> n >> m;
+        vector<vector<int>>v(n+2,vector<int>(m+2,0));
 
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
-    }
-  
+        for(int i = 1; i<=n; i++){
+            for(int j = 1; j<=m; j++){
+                cin >> v[i][j];
+            }
+        }
+
+        // for(auto u :v ){
+        //     for(auto m : u){
+        //         cout << m <<' ';
+        //     }
+        //     cout << nl;
+        // }
+        map<int,int>mp;
+        for(int i = 1; i<=n; i++){
+            for(int j =1; j<=m; j++){
+                if(v[i][j]==v[i-1][j]) v[i][j]*=-1, mp[v[i][j]]++;
+                else if(v[i][j]==v[i][j-1]) v[i][j]*=-1, mp[v[i][j]]++;
+                else if(v[i][j]==v[i][j+1]) v[i][j]*=-1, mp[v[i][j]]++;
+                else if(v[i][j]==v[i+1][j]) v[i][j]*=-1, mp[v[i][j]]++;
+                else mp[v[i][j]]++;
+            }
+        }
+        vector<int>nw;
+        for(auto u: mp){
+            int x, y; x = u.first, y = u.second;
+            //cout <<x<<' '<<y<<nl;
+            nw.pb(x);
+        }
+        int ans = 0;
+        for(int i = 0; i<nw.size(); i++){
+            if(i==0 && nw[i]<0) continue;
+            //else if(nw[i]<0) ans+=mp[nw[i]];
+            else ans++;
+        }
+        out(--ans);
  
 }
 int main() {

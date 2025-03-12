@@ -24,7 +24,7 @@ using namespace std;
 #define      out(x)        cout<<x<<nl
 #define      nl            '\n'
 #define      precision(n)  fixed<<setprecision(n)  //example cout<<precision(3)<<n<<endl;
-
+#define INF 10000000
 // vector input
 template<typename T> istream &operator>>(istream&in, vector<T>&v){ for(auto &it : v ) in>> it; return in;}
 
@@ -57,30 +57,32 @@ int ceil(int a,int b)
 {
     return (a+b-1)/b;
 }
+int dp[100000];
+int n, a, b, c;
+int way(int len){
+    if(len==0) return 0;
+    if(len<0) return -INF;
+    
+    if(dp[len]!=-1) return dp[len];
+    int mx = -INF;
+    mx = max(mx,1+way(len-a));
+    mx= max(mx, 1+way(len-b));
+    mx = max(mx,1+way(len-c));
+
+    return dp[len] = mx;
+}
 
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
-
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
-
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
-    }
-  
+    memset(dp,-1,sizeof(dp));
+    cin >> n >> a >> b >> c;
+    cout << way(n) << nl;
  
 }
 int main() {
     fast();
     
     int t;t=1;
-    cin>>t;
+    //cin>>t;
     while(t--)solve();
     return 0;
 }

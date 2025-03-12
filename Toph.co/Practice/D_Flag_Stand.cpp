@@ -59,21 +59,22 @@ int ceil(int a,int b)
 }
 
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
 
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
+        cout<<precision(8);
+         long double H, h; cin >> H >> h;
+         long double hypo=H-h;
+        long double r=acos(h/hypo);
+        if(h>hypo) cout<<0.0<<nl;
+        else cout<<(180.0*r/M_PI)<<nl;
 
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
-    }
-  
+    // void test(int32_t tc) {
+    // cout << fixed << setprecision(8);
+    // long double H, h; cin >> H >> h;
+    // long double hyp = H - h;
+    // if (h > hyp) cout << 0;
+    // else cout << acos(h / hyp) * (180.0 / M_PI);
+    // cout << '\n';
+    //     }
  
 }
 int main() {

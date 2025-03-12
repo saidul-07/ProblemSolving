@@ -57,30 +57,35 @@ int ceil(int a,int b)
 {
     return (a+b-1)/b;
 }
-
-void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
-
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
-
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
+int sum(ll n){
+    int ans = 0;
+    while(n!=0){
+        int r = n%10;
+        ans +=r;
+        n/=10;
     }
-  
+    return ans ;
+}
+void solve(){
+
+        ll n; cin >> n;
+        ll sq = sqrt(n);
+        ll init = max(sq-90,1LL);
+        for(ll i = init; i<=sqrt(n)+90; i++){
+            //cout << sq<<' ';
+            if(i*i+i*sum(i)==n){
+                cout << i<<nl;
+                return;
+            }
+        }
+        cout << -1 << nl;
  
 }
 int main() {
     fast();
     
     int t;t=1;
-    cin>>t;
+   // cin>>t;
     while(t--)solve();
     return 0;
 }

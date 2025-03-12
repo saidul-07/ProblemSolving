@@ -59,21 +59,19 @@ int ceil(int a,int b)
 }
 
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
 
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
+        ll n; cin >> n;
 
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
-    }
-  
+        int c = 2, ans = 0;
+        while(n>1){
+            n-=c;
+            c+=3;
+            if(c>n){
+                ans++;
+                c= 2;
+            }
+        }
+    cout<<ans<<nl; 
  
 }
 int main() {

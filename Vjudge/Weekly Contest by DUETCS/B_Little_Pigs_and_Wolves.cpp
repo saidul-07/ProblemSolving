@@ -57,30 +57,58 @@ int ceil(int a,int b)
 {
     return (a+b-1)/b;
 }
-
+char arr[15][15];
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
 
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
+        int n, m; cin >> n >> m;
+        for(int i = 1; i<=n; i++)
+            for(int j = 1; j<=m; j++)
+                cin >> arr[i][j];
+       
+        for(int i = 0; i<=n+1; i++) arr[i][0]=arr[i][m+1]='.';
+        for(int i = 0; i<=m+1; i++) arr[0][i]=arr[n+1][i]='.';
 
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
-    }
-  
+        // for(int i = 0; i<=n+1; i++){
+        //     for(int j = 0; j<=m+1; j++){
+        //         cout<<arr[i][j];
+        //     }
+        //     cout<<nl;
+        // }
+
+        vector<pair<int,pair<int,int>>>v;
+        for(int i = 1; i<=n; i++){
+            for(int j =1; j<=m; j++){
+                if(arr[i][j]=='W'){
+                    int temp = 0;
+                    if(arr[i-1][j]=='P')temp++;
+                    if(arr[i+1][j]=='P')temp++;
+                    if(arr[i][j-1]=='P')temp++;
+                    if(arr[i][j+1]=='P')temp++;
+                    if(temp)v.push_back({temp,{i,j}});
+                }
+            }
+        }
+
+        sort(all(v));
+        int ans = 0;
+        for(int i = 0; i<v.size(); i++){
+            int x, y;
+            x = v[i].second.first,y = v[i].second.second;
+            if(arr[x-1][y]=='P')ans++,arr[x-1][y]='.';
+            else if(arr[x+1][y]=='P')ans++,arr[x+1][y]='.';
+            else if(arr[x][y-1]=='P')ans++,arr[x][y-1]='.';
+            else if(arr[x][y+1]=='P')ans++,arr[x][y+1]='.';
+
+        }
+        cout << ans <<nl;
+
  
 }
 int main() {
     fast();
     
     int t;t=1;
-    cin>>t;
+    //cin>>t;
     while(t--)solve();
     return 0;
 }

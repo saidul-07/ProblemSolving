@@ -59,28 +59,40 @@ int ceil(int a,int b)
 }
 
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
 
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
+        ll n,q; cin >> n >> q;
+        vll v(n+1,0);
+        for(int i=1; i<=n; i++) cin >> v[i];
+        vi freq(n+1,0);
+        while(q--){
+            ll l,r; cin >> l >> r;
+            freq[l]++;
+            if(r<n) freq[r+1]--;
+        }
+        for(int i =2; i<=n; i++){
+            freq[i]=freq[i-1]+freq[i];
+        }
 
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
-    }
-  
+        // for(int i= 1; i<=n; i++)cout<<freq[i]<<' ';
+        // cout << nl;
+
+        sort(v.rbegin(),v.rend());
+        sort(freq.rbegin(),freq.rend());
+        
+        ll sum = 0;
+        for(int i =0; i<n; i++){
+            sum+=(v[i]*freq[i]);
+            //cout<<sum<<' ';
+        }
+
+        cout << sum << nl;
  
 }
 int main() {
     fast();
     
     int t;t=1;
-    cin>>t;
+    //cin>>t;
     while(t--)solve();
     return 0;
 }

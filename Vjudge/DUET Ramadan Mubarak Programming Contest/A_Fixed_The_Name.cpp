@@ -59,21 +59,15 @@ int ceil(int a,int b)
 }
 
 void solve(){
-    int n, q; cin >> n >> q;
-    vll v(n); cin >> v;
 
-    sort(v.rbegin(),v.rend());
-    for(int i = 1; i<n; i++)
-        v[i]+=v[i-1];
-    //cout << v;
+        string s,t; cin >>s;
+        t = "ADVITIYA";
 
-    while(q--){
-        int x; cin >> x;
-        int index = lower_bound(v.begin(),v.end(),x)-v.begin();
-        if(index>=n) cout << -1 << nl;
-        else cout << index+1 << nl;
-    }
-  
+        int ans = 0;
+        for(int i = 0; i<s.size(); i++){
+            ans+=((t[i]-s[i]+26)%26);
+        }
+        cout << ans <<nl;
  
 }
 int main() {

@@ -39,32 +39,21 @@ ostream &operator<<(ostream &out,vector<T>&v){
     return out<<endl;
 }
 
-int climbStairs(int n,vector<ll>&dp){
-    if(n<=1) return 1;
-    if(dp[n]!=-1) return dp[n];
-    int ans = 0;
-    ans+=climbStairs(n-1,dp);
-    ans+=climbStairs(n-2,dp);
-    dp[n] = ans;
-    return ans;
-}
-void solve(){
+ll mem[1000];
+
+long long f(ll n){
+
+        if(n<=1) return n;
+
+        if(mem[n]!=-1) return mem[n];
     
-    int n; cin >> n;
-    vector<ll>dp(n,-1);
-    cout<<climbStairs(n,dp)<<nl;
+        return mem[n]=f(n-1)+f(n-2);    
 }
 int main() {
-    fast();
-   
-    #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r",stdin);
-    freopen("output.txt","w",stdout);
-    #endif
-    
-    int t;t=1;
-   // cin>>t;
-    while(t--)solve();
+    ll n; cin >> n;
+    memset(mem,-1,sizeof(mem));
+   cout << f(n);
+
     return 0;
 }
 
