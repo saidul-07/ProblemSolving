@@ -38,6 +38,7 @@
         "utility": "cpp",
         "typeindex": "cpp",
         "valarray": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "cmath": "cpp"
     }
 }
